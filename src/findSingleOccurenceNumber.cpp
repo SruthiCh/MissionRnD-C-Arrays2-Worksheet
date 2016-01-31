@@ -13,6 +13,19 @@ ERROR CASES: Return -1 for invalid inputs.
 NOTES:
 */
 
+#include<iostream>
+
 int findSingleOccurenceNumber(int *A, int len) {
-	return -1;
+	int i, once=0, twice=0,common=0;
+	if (A == NULL)
+		return -1;
+	for (i = 0; i < len; i++)
+	{
+		twice |= once & A[i];
+		once ^= A[i];
+		common = ~(once & twice);
+		once &= common;
+		twice &= common;
+	}
+	return once;
 }
